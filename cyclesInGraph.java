@@ -1,6 +1,9 @@
 public class cyclesInGraphs{
 	public static void main(String[] args){
 		HashMap<String, ArrayList<String>> graph = new HashMap<String, ArrayList<String>>();
+		public static ArrayList<String> unvisited = new ArrayList<String>();
+		public static ArrayList<String> visiting = new ArrayList<String>();
+		public static ArrayList<String> visited = new ArrayList<String>();
 		String[] vertices;
 
 		try{
@@ -11,6 +14,13 @@ public class cyclesInGraphs{
                	Pattern exp = Pattern.compile("[\\p{Punct}\\d]");
                 Matcher w = exp.matcher(line);
                 vertices = w.replaceAll("").split(" ");
+                
+                if(unvisited.contains(vertices[0]))
+                	unvisited.add(vertices[0]);
+                else if(unvisited.contains(vertices[1])){
+                	unvisited.add(vertices[1]);
+                }
+
                 if(!graph.containsKey(vertices[0])){
                 	graph.put(vertices[0], new ArrayList<String>());
                 	graph.put(vertices[0], graph.get(vertices[0]).add(vertices[1]);
@@ -23,23 +33,54 @@ public class cyclesInGraphs{
             	
             }
 
+            if(isDirectedCyclic(graph))
+            {
+            	System.out.println("Graph is Cyclic");
+            }
+            else{
+            	System.out.println("Graph is Acyclic")
+            }
+
 		}
-		catch(){}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 	
 
 	}	
-	public boolean isDirectedCyclic(Graph<Integer> graph){
-			  ArrayList<String> visited = new ArrayList<String>();
-			  ArrayList<ArrayList<String>> visitList = new ArrayList<ArrayList<String>>();
-			  Stack<String> stack = new Stack<String>();
-			  visitList.add();
-			  stack = push();
-			  while(!stack.isEmpty()){
-			  	stack.peek()
+	public boolean isDirectedCyclic(HashMap<String, ArrayList<String>> graph){
+
+			  for(int i =0; i< graph.size();i++){
+			  		moveToVisited(graph());
+
 			  }
+			  
+
+			  if(graph.size()==1){
+			  	return false;
+			  }
+			  else{
+			  	return true;
+			  }
+
+			  
+			 
 	}
 
 
 
-	public boolean dfs(){}
+	public void moveToVisited(HashMap<String, ArrayList<String>> graph){
+		 	for(Map.Entry<String, ArrayList<String>> entry: graph.entrySet()){
+			  		if(entry.getValue().size()==0){
+			  			int key = entry.getKey();
+			  			graph.remove(key);
+			  			for(Map.Entry<String, ArrayList<String>> entry2: graph.entrySet()){
+			  				entry.getValue().remove(key);
+			  			}
+			  		}
+			  }
+
+
+
+	}
 }
