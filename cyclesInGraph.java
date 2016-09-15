@@ -60,7 +60,11 @@ public class cyclesInGraphs{
 			  	return false;
 			  }
 			  else{
+<<<<<<< HEAD
 			  	return true;
+=======
+			  	return false;
+>>>>>>> origin/master
 			  }
 
 			  
